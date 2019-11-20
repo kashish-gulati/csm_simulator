@@ -133,15 +133,27 @@ int main()
     while(!(cpu_queue.empty()&&disk1_queue.empty()&&disk2_queue.empty()))
     {
         fl=0;
+        cout<<"\n**********************************************\n";
         cout<<"System State At "<<time<<" Seconds\n";
-        cout<<"CPU Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
-        printQueue(cpu_queue);
+        if(!cpu_queue.empty()){
+           cout<<"CPU Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
+           printQueue(cpu_queue);
+        }
+        else
+            cout<<"CPU:Queue Empty\n";
+        if(!disk1_queue.empty()){
+            cout<<"Disk 1 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
+            printQueue(disk1_queue);
+        }
+        else
+            cout<<"Disk 1:Queue Empty\n";
 
-        cout<<"Disk 1 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
-        printQueue(disk1_queue);
-
-        cout<<"Disk 2 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
-        printQueue(disk2_queue);
+        if(!disk2_queue.empty()){
+            cout<<"Disk 2 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
+            printQueue(disk2_queue);
+        }
+        else
+            cout<<"Disk 2:Queue Empty\n";
         time++;
         Process temp,temp1;
         if(((time%CPUBUFFER==0)&&(!cpu_queue.empty())))
@@ -185,12 +197,25 @@ int main()
         std::chrono::milliseconds timespan(1000);
         std::this_thread::sleep_for(timespan);
     }
+    cout<<"\n**********************************************\n";
     cout<<"System State At "<<time<<" Seconds\n";
+    if(!cpu_queue.empty()){
         cout<<"CPU Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
         printQueue(cpu_queue);
+    }
+    else
+        cout<<"CPU:Queue Empty\n";
+    if(!disk1_queue.empty()){
         cout<<"Disk 1 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
         printQueue(disk1_queue);
+    }
+    else
+        cout<<"Disk 1:Queue Empty\n";
+    if(!disk2_queue.empty()){
         cout<<"Disk 2 Queue\n"<<"Process ID\tProcess Name\n"<<"----------------------------------\n";
         printQueue(disk2_queue);
+    }
+    else
+        cout<<"Disk 2:Queue Empty\n";
     return 0;
 }
